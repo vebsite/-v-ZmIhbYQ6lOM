@@ -97,10 +97,28 @@ body {
 </audio>
 
 <script>
+
+const ringtone = new Audio(
+  "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg"
+);
+ringtone.loop = true;
+
+// Start on first tap anywhere
+document.body.addEventListener("click", () => {
+  ringtone.play().catch(() => {});
+  
+  if (navigator.vibrate) {
+    setInterval(() => navigator.vibrate([300, 200]), 1200);
+  }
+}, { once: true });
+
 document.querySelector('.accept').onclick = () => {
+  ringtone.pause();
+  
   document.body.innerHTML =
-    "<div style='color:white;font-size:38px;text-align:center;margin-top:40vh;'>😄 Gde si Nadja 😄</div>";
+    "<div style='color:white;font-size:38px;text-align:center;margin-top:40vh;'>Gde si Nadja?</div>";
 };
+
 </script>
 
 </body>
