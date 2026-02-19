@@ -98,25 +98,25 @@ body {
 
 <script>
 
-const ringtone = new Audio(
-  "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg"
-);
+const ringtone = new Audio("ringtone.mp3");
 ringtone.loop = true;
 
-// Start on first tap anywhere
-document.body.addEventListener("click", () => {
+document.querySelector('.accept').onclick = () => {
+
+  // Start sound on button press
   ringtone.play().catch(() => {});
-  
+
+  // Vibrate if supported
   if (navigator.vibrate) {
     setInterval(() => navigator.vibrate([300, 200]), 1200);
   }
-}, { once: true });
 
-document.querySelector('.accept').onclick = () => {
-  ringtone.pause();
-  
-  document.body.innerHTML =
-    "<div style='color:white;font-size:38px;text-align:center;margin-top:40vh;'>Gde si Nadja?</div>";
+  // Show prank after 2 seconds
+  setTimeout(() => {
+    ringtone.pause();
+    document.body.innerHTML =
+      "<div style='color:white;font-size:38px;text-align:center;margin-top:40vh;'>😄 GOT YOU 😄</div>";
+  }, 2000);
 };
 
 </script>
